@@ -58,7 +58,7 @@ exports.addUser = function(req, res) {
 	var user = new userModel({
 		username: req.body.username,
 		password: req.body.password,
-		mail: req.body.mail,
+		email: req.body.email,
     description:   req.body.description
 	});
 
@@ -67,23 +67,19 @@ exports.addUser = function(req, res) {
     res.status(200).jsonp(user);
 	});
 };
-exports.addEviction = function(req, res) {
-	console.log('POST new eviction, title: ' + req.body.title);
+exports.addPublication = function(req, res) {
+	console.log('POST new publication, title: ' + req.body.title);
 
 	console.log(req.params.id);
 
 	userModel.findById(req.params.id, function(err, user){
 		console.log(user.name);
-		var eviction = {
+		var publication = {
 			title: req.body.title,
-			date: req.body.date,
-			direction: req.body.direction,
-	    description:   req.body.description,
-			access: req.body.access,
-	    city:   req.body.city,
-	    district:   req.body.district
+			date: new Date(),
+			content: req.body.content
 		};
-		user.evictions.push(eviction);
+		user.publications.push(publication);
 
 		user.save(function(err, user) {
 			if(err) return res.send(500, err.message);

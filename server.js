@@ -58,8 +58,6 @@ apiRoutes.route('/users')
 apiRoutes.route('/users/:username')
   .get(userCtrl.findUserByUsername);
 
-apiRoutes.route('/users/:id/evictions')
-  .post(userCtrl.addEviction);
 
 apiRoutes.route('/auth')
     .post(userCtrl.login);
@@ -98,6 +96,9 @@ apiRoutes.use(function(req, res, next) {
   }
 }); //fi verificació de token
 
+
+apiRoutes.route('/users/:id/publications')
+  .post(userCtrl.addPublication);
 
 /*apiRoutes.route('/users/:id')
   .put(userCtrl.updateUser)
